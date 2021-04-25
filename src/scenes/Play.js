@@ -4,10 +4,17 @@ class Play extends Phaser.Scene{
     }
 
     preload(){
+
         // load the images/tile sprites
-        // this.load.image('rocket', './assets/rocket.png');
-        // this.load.image('spaceship', './assets/spaceship.png');
-        // this.load.image('starfield', './assets/starfield.png');
+        // ------------------BACKGROUND
+        this.load.image('parallax_0', './assets/parallax-mountain-bg.png');
+        this.load.image('parallax_1', './assets/parallax-mountain-montain-far.png');
+        this.load.image('parallax_2', './assets/parallax-mountain-mountains.png');
+        this.load.image('parallax_3', './assets/parallax-mountain-trees.png');
+        this.load.image('parallax_4', './assets/parallax-mountain-foreground-trees.png');
+
+        // ------------------PLAYER
+
 
         // load a spritesheet
         // this.load.spritesheet('explosion', './assets/explosion.png', {
@@ -19,11 +26,43 @@ class Play extends Phaser.Scene{
     }
 
     create() {
-        // //this.add.text(20,20, "Rocket Patrol Menu Play");
 
-        // // place starfield
-        // this.starfield = this.add.tileSprite(0, 0, game.config.width, game.config.height,
-        //      'starfield').setOrigin(0,0);
+        // Create and Place Parallax Background
+        // ------------------------------------ Placing the base background
+        this.parallax_base = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_0').setOrigin(0,0);
+        this.parallax_base.setScrollFactor(0);
+        this.parallax_base.displayWidth = game.config.width*3.5; // Fixing scale to fit screen
+        this.parallax_base.scaleY = this.parallax_base.scaleX;
+
+        // ------------------------------------ Placing the 1st Layer
+        this.parallax_1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_1').setOrigin(0,0);
+        this.parallax_1.setScrollFactor(0);
+        this.parallax_1.displayWidth = game.config.width*3.5;
+        this.parallax_1.scaleY = this.parallax_base.scaleX;
+
+        // ------------------------------------ Placing the 2nd Layer
+        this.parallax_2 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_2').setOrigin(0,0);
+        this.parallax_2.setScrollFactor(0);
+        this.parallax_2.displayWidth = game.config.width*3.5;
+        this.parallax_2.scaleY = this.parallax_base.scaleX;
+
+        // ------------------------------------ Placing the 3rd Layer
+        this.parallax_3 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_3').setOrigin(0,0);
+        this.parallax_3.setScrollFactor(0);
+        this.parallax_3.displayWidth = game.config.width*3.5;
+        this.parallax_3.scaleY = this.parallax_base.scaleX;
+
+        // ------------------------------------ Placing the 4th Layer
+        this.parallax_4 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_4').setOrigin(0,0);
+        this.parallax_4.setScrollFactor(0);
+        this.parallax_4.displayWidth = game.config.width*3.5;
+        this.parallax_4.scaleY = this.parallax_base.scaleX;
+
+        // Create Game Camera
+        this.myCam = this.cameras.main;
+
+        // // making the camera follow the player
+        // this.myCam.startFollow(this.player);
 
         // // green UI background
         // this.add.rectangle(0, borderUISize + borderPadding, game.config.width,
@@ -97,7 +136,21 @@ class Play extends Phaser.Scene{
         // }, null, this);
     }
 
+    createParallaxBackground(){
+        
+    }
+
     update() {
+
+        // Camera and Parallax Movement
+        // ------------------------------------ Scrolling the camera
+        this.myCam.scrollX -= 3;
+        // ------------------------------------ Changing the scroll speed of each layer
+        this.parallax_1.tilePositionX = this.myCam.scrollX * .2;
+        this.parallax_2.tilePositionX = this.myCam.scrollX * .4;
+        this.parallax_3.tilePositionX = this.myCam.scrollX * .5;
+        this.parallax_4.tilePositionX = this.myCam.scrollX;
+        
         // // check key input for restart
         // if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
         //     this.scene.restart();

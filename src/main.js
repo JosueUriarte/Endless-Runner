@@ -3,6 +3,7 @@ let config = {
     width: 960,
     height: 540,
     autoCenter: true,
+    pixelArt: true,
     scene: [Menu, Play ]
 }
 
@@ -16,4 +17,4 @@ let borderPadding = borderUISize / 3;
 let starSpeed = 2;
 
 // reserve keyboard bindings
-let keyF, keyR, keyLEFT, keyRIGHT, keySPACE;
+let keyLEFT, keySPACE;
