@@ -1,5 +1,5 @@
 TODO:
-
+Fix hitbox/body of object so that they dont scroll
 
 
 
