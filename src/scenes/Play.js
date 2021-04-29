@@ -79,8 +79,7 @@ class Play extends Phaser.Scene{
         this.ground.setScrollFactor(0, 0);
 
         // Test player
-        this.test_player = this.physics.add.sprite(game.config.width/2, game.config.height/2,
-        'test_player').setOrigin(0, 0);
+        this.test_player = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'test_player').setOrigin(0, 0);
         this.test_player.setCollideWorldBounds(true);
         this.test_player.setScrollFactor(0, 0);
         //this.test_player.body.setScrollFactor(0, 0);
@@ -98,14 +97,12 @@ class Play extends Phaser.Scene{
 
     update() {
 
-        // Camera and Parallax Movement
-        // ------------------------------------ Scrolling the camera
-        this.myCam.scrollX -= 3;
+        // Parallax Movement
         // ------------------------------------ Changing the scroll speed of each layer
-        this.parallax_1.tilePositionX = this.myCam.scrollX * .2;
-        this.parallax_2.tilePositionX = this.myCam.scrollX * .4;
-        this.parallax_3.tilePositionX = this.myCam.scrollX * .5;
-        this.parallax_4.tilePositionX = this.myCam.scrollX;
+        this.parallax_1.tilePositionX -= 1;
+        this.parallax_2.tilePositionX -= 1.5;
+        this.parallax_3.tilePositionX -= 2;
+        this.parallax_4.tilePositionX -= 2.5;
         
         // check keyboard input
         //if(cursors.left.isDown) {}
