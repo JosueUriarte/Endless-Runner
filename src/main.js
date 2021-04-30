@@ -19,10 +19,9 @@ let config = {
             }
         }
     },
-    
     autoCenter: true,
     pixelArt: true,
-    scene: [Menu, Play ]
+    scene: [Menu, Play]
 }
 
 let game = new Phaser.Game(config);
@@ -32,7 +31,7 @@ let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
 // set speed for background
-let starSpeed = 2;
+let scrollSpeed = 3;
 
 // reserve keyboard bindings
 let keyLEFT, keySPACE;

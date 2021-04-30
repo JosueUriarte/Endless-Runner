@@ -29,13 +29,7 @@ class Play extends Phaser.Scene{
     create() {
 
         // variables and settings
-        this.ACCELERATION = 1500;
-        this.MAX_X_VEL = 500;
-        this.MAX_Y_VEL = 5000; 
-        this.MAX_JUMPS = 2;
-        this.JUMP_VELOCITY = -700;
-        this.DRAG = 600;
-        this.physics.world.gravity.y = 2600;
+        
 
         // Create and Place Parallax Background
         // ------------------------------------ Placing the base background
@@ -72,20 +66,16 @@ class Play extends Phaser.Scene{
         this.myCam = this.cameras.main;
 
         // Ground
-        this.ground = this.physics.add.sprite(0, game.config.height - 70,
-        'ground').setOrigin(0, 0);
+        this.ground = this.physics.add.sprite(40, game.config.height - 10, 'ground').setOrigin(0, 0);
         this.ground.body.immovable = true;
         this.ground.body.allowGravity = false;
         this.ground.setScrollFactor(0, 0);
 
-        // Test player
-        this.test_player = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'test_player').setOrigin(0, 0);
-        this.test_player.setCollideWorldBounds(true);
-        this.test_player.setScrollFactor(0, 0);
-        //this.test_player.body.setScrollFactor(0, 0);
+        // New Player
+        this.test_player = new Runner(this, game.config.width/2, game.config.height/2, 'test_player');
         
         // setup cursor key input
-        cursors = this.input.keyboard.createCursorKeys(); 
+        this.cursors = this.input.keyboard.createCursorKeys(); 
 
         // setup collider
         this.physics.add.collider(this.test_player, this.ground);
@@ -99,47 +89,12 @@ class Play extends Phaser.Scene{
 
         // Parallax Movement
         // ------------------------------------ Changing the scroll speed of each layer
-        this.parallax_1.tilePositionX -= 1;
-        this.parallax_2.tilePositionX -= 1.5;
-        this.parallax_3.tilePositionX -= 2;
-        this.parallax_4.tilePositionX -= 2.5;
+        this.parallax_1.tilePositionX -= scrollSpeed / 4;
+        this.parallax_2.tilePositionX -= scrollSpeed / 3;
+        this.parallax_3.tilePositionX -= scrollSpeed / 2;
+        this.parallax_4.tilePositionX -= scrollSpeed;
         
-        // check keyboard input
-        //if(cursors.left.isDown) {}
-        if(cursors.left.isDown) {
-            this.test_player.body.setAccelerationX(-this.ACCELERATION);
-            this.test_player.setFlip(true, false);
-        } else if(cursors.right.isDown) {
-            this.test_player.body.setAccelerationX(this.ACCELERATION);
-            this.test_player.resetFlip();
-        } else {
-            // set acceleration to 0 so DRAG will take over
-            this.test_player.body.setAccelerationX(0);
-            this.test_player.body.setDragX(this.DRAG);
-        }
-    
-        // check if player is on the ground
-        this.test_player.isGrounded = this.test_player.body.touching.down;
-
-        if(this.test_player.isGrounded) {
-            this.jumps = this.MAX_JUMPS;
-            this.jumping = false;
-        } else {
-            // play jumping animation
-        }
-
-        // allows for steady change up to a certain key down duration
-        if (this.jumps > 0 && Phaser.Input.Keyboard.DownDuration(cursors.up, 150)) {
-            this.test_player.body.velocity.y = this.JUMP_VELOCITY;
-            this.jumping = true;
-        }
-
-        // letting go of the up key subtracts a jump
-        if (this.jumping && Phaser.Input.Keyboard.UpDuration(cursors.up)) {
-            this.jumps--;
-            this.jumping = false;
-        }
-       
+        this.test_player.update(this);
     }
 
     checkCollision(obj1, obj2){
