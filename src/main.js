@@ -34,4 +34,4 @@ let borderPadding = borderUISize / 3;
 let scrollSpeed = 3;
 
 // reserve keyboard bindings
-let keyLEFT, keySPACE;
+let keyR, keySPACE;

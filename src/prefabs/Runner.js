@@ -6,11 +6,12 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
         
         // Physics Properties
         this.setCollideWorldBounds(true);
+        this.body.setSize(this.width, this.height, true);
         this.setGravityY(2000);
         
 
         // Physics Variables
-        this.ACCELERATION = 15000;
+        this.ACCELERATION = 1000;
         this.MAX_X_VEL = 100;
         this.MAX_Y_VEL = 100; 
         this.MAX_JUMPS = 2;
@@ -20,22 +21,22 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
 
     update(scene){
 
-        this.body.setVelocityX(100);
+        //this.body.setVelocityX(100);
         // Check keyboard input
         //if(cursors.left.isDown) {}
-        if(scene.cursors.left.isDown && !scene.cursors.right.isDown) {
-            this.body.setAccelerationX(-this.ACCELERATION);
-            this.setFlip(true, false);
-        } 
-        else if(scene.cursors.right.isDown && !scene.cursors.left.isDown) {
-            this.body.setAccelerationX(this.ACCELERATION);
-            this.resetFlip();
-        } 
-        else {
-            // set acceleration to 0 so DRAG will take over
-            this.body.setAccelerationX(0);
-            this.body.setDragX(this.DRAG);
-        }
+        // if(scene.cursors.left.isDown && !scene.cursors.right.isDown) {
+        //     this.body.setAccelerationX(-this.ACCELERATION);
+        //     this.setFlip(true, false);
+        // } 
+        // else if(scene.cursors.right.isDown && !scene.cursors.left.isDown) {
+        //     this.body.setAccelerationX(this.ACCELERATION);
+        //     this.resetFlip();
+        // } 
+        // else {
+        //     // set acceleration to 0 so DRAG will take over
+        //     this.body.setAccelerationX(0);
+        //     this.body.setDragX(this.DRAG);
+        // }
     
         // // check if player is on the ground
         this.isGrounded = this.body.touching.down;

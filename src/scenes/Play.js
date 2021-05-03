@@ -27,9 +27,13 @@ class Play extends Phaser.Scene{
     }
 
     create() {
-
-        // variables and settings
         
+        // Create Game Camera
+        this.myCam = this.cameras.main;
+
+        // Assign Keys
+        keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        this.cursors = this.input.keyboard.createCursorKeys(); 
 
         // Create and Place Parallax Background
         // ------------------------------------ Placing the base background
@@ -62,39 +66,92 @@ class Play extends Phaser.Scene{
         this.parallax_4.displayWidth = game.config.width*3.5;
         this.parallax_4.scaleY = this.parallax_base.scaleX;
 
-        // Create Game Camera
-        this.myCam = this.cameras.main;
-
-        // Ground
-        this.ground = this.physics.add.sprite(40, game.config.height - 10, 'ground').setOrigin(0, 0);
+        // Create Ground Tile Sprite
+        this.ground = this.add.tileSprite(50, 510, 0, 0, 'ground').setOrigin(0, 0);
+        this.physics.add.existing(this.ground);
         this.ground.body.immovable = true;
-        this.ground.body.allowGravity = false;
-        this.ground.setScrollFactor(0, 0);
 
-        // New Player
-        this.test_player = new Runner(this, game.config.width/2, game.config.height/2, 'test_player');
-        
-        // setup cursor key input
-        this.cursors = this.input.keyboard.createCursorKeys(); 
+        // Set up game over flag
+        this.gameOver = false;        
+
+        // Create New Player
+        this.test_player = new Runner(this, game.config.width - 150, game.config.height - 100, 'test_player');
+
+        // Create Obstacle
+        this.obstacleGroup = this.physics.add.group ({
+            classType: Obstacle,
+            setDepth: 0,
+            maxSize: 1,
+            runChildUpdate: true
+        });
 
         // setup collider
         this.physics.add.collider(this.test_player, this.ground);
+        this.physics.add.overlap(this.obstacleGroup, this.test_player, this.gameEnd, null, this);
+        
+        // DEBUG STUFF
+        this.info = this.add.text(0, 0, 'objects being used', { fill: '#00ff00' });
+        
     }
 
-    createParallaxBackground(){
-        
+    gameEnd(){
+
+        let gameOverConfig = {
+            fontFamily: 'Roboto',
+            fontSize: '20px',
+            //backgroundColor: '#00FFE0',
+            color: '#FFFFFF',
+            align: 'center',
+            padding:{
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+
+        this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', gameOverConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 30, 'Press R to Restart', gameOverConfig).setOrigin(0.5);
+        this.gameOver = true;
     }
 
     update() {
 
-        // Parallax Movement
-        // ------------------------------------ Changing the scroll speed of each layer
-        this.parallax_1.tilePositionX -= scrollSpeed / 4;
-        this.parallax_2.tilePositionX -= scrollSpeed / 3;
-        this.parallax_3.tilePositionX -= scrollSpeed / 2;
-        this.parallax_4.tilePositionX -= scrollSpeed;
+        // DEBUG FOR SPAWNER
+        this.info.setText([
+            'Used: ' + this.obstacleGroup.getTotalUsed(),
+            'Free: ' + this.obstacleGroup.getTotalFree()
+        ]);
         
-        this.test_player.update(this);
+        // Do these tasks if game is not over
+        if(!this.gameOver) {
+
+            // Spawning Obstacles
+            var obstacle = this.obstacleGroup.get();
+            if(obstacle){
+                obstacle.chooseTexture();
+                obstacle.spawn(this.ground.x - 100, this.ground.y - this.ground.height, 400);
+            }
+
+            // Parallax Movement
+            // ----------------- Changing the scroll speed of each layer
+            this.parallax_1.tilePositionX -= scrollSpeed / 4;
+            this.parallax_2.tilePositionX -= scrollSpeed / 3;
+            this.parallax_3.tilePositionX -= scrollSpeed / 2;
+            this.parallax_4.tilePositionX -= scrollSpeed;
+
+            // Ground Movement
+            this.ground.tilePositionX -= scrollSpeed / 2.5;
+        
+            // Player Update
+            this.test_player.update(this);
+        }
+
+        // Restart Scene when game is over and key is pressed
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            //this.mainTheme.stop();
+            this.scene.restart();
+        }
+
     }
 
     checkCollision(obj1, obj2){
