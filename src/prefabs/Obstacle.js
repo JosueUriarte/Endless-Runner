@@ -9,17 +9,16 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite{
         this.obSpeed = 0;
     }
 
-    spawn(x, y, speed){
+    spawn(x, y){
         // When spawned, activate and set its position
         this.setActive(true);
         this.setVisible(true);
         this.setPosition(x, y);
-        this.obSpeed = speed;
     }
 
     update(){
 
-        // If the obstacle goes out of bounds, deactivate
+        // If the obstacle goes out of bounds, deactivate 
         if (this.x >= game.config.width + 60){
             this.setActive(false);
             this.setVisible(false);
@@ -29,13 +28,26 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite{
         this.body.setVelocityX(this.obSpeed);
     }
 
-    chooseTexture(){
-        this.setTexture('test_player');
+    chooseCar(num){
+
+        // Here we choose what car will be spawned
+        switch(num){
+            case 0:
+                console.log("zero");
+                this.setTexture('spcar');
+                this.obSpeed = 500;
+                break;
+            case 1:
+                console.log("one");
+                this.setTexture('car');
+                this.obSpeed = 400;
+                break;
+            default:
+                console.log("no car specified")
+        }
+        
         this.body.setSize(this.width, this.height, true);
     }
 
-    reset(){
-        //this.x = game.config.width;
-    }
 }
 

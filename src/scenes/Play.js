@@ -14,6 +14,8 @@ class Play extends Phaser.Scene{
         this.load.image('parallax_4', './assets/parallax-mountain-foreground-trees.png');
         this.load.image('ground', "./assets/ground.png");
         this.load.image('test_player', "./assets/test_player.png");
+        this.load.image('car', "./assets/car.png");
+        this.load.image('spcar', "./assets/spcar.png");
 
         // ------------------PLAYER
 
@@ -120,6 +122,7 @@ class Play extends Phaser.Scene{
         this.info.setText([
             'Used: ' + this.obstacleGroup.getTotalUsed(),
             'Free: ' + this.obstacleGroup.getTotalFree()
+            //'Obstacle Num: ' + Math.floor(Math.random() * 2)
         ]);
         
         // Do these tasks if game is not over
@@ -128,8 +131,8 @@ class Play extends Phaser.Scene{
             // Spawning Obstacles
             var obstacle = this.obstacleGroup.get();
             if(obstacle){
-                obstacle.chooseTexture();
-                obstacle.spawn(this.ground.x - 100, this.ground.y - this.ground.height, 400);
+                obstacle.chooseCar(Math.floor(Math.random() * 2));
+                obstacle.spawn(this.ground.x - 100, this.ground.y - this.ground.height);
             }
 
             // Parallax Movement
