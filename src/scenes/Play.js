@@ -40,33 +40,19 @@ class Play extends Phaser.Scene{
         // Create and Place Parallax Background
         // ------------------------------------ Placing the base background
         this.parallax_base = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_0').setOrigin(0,0);
-        this.parallax_base.setScrollFactor(0);
-        this.parallax_base.displayWidth = game.config.width*3.5; // Fixing scale to fit screen
-        this.parallax_base.scaleY = this.parallax_base.scaleX;
-
+        this.setParallaxConfig(this.parallax_base);
         // ------------------------------------ Placing the 1st Layer
         this.parallax_1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_1').setOrigin(0,0);
-        this.parallax_1.setScrollFactor(0);
-        this.parallax_1.displayWidth = game.config.width*3.5;
-        this.parallax_1.scaleY = this.parallax_base.scaleX;
-
+        this.setParallaxConfig(this.parallax_1);
         // ------------------------------------ Placing the 2nd Layer
         this.parallax_2 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_2').setOrigin(0,0);
-        this.parallax_2.setScrollFactor(0);
-        this.parallax_2.displayWidth = game.config.width*3.5;
-        this.parallax_2.scaleY = this.parallax_base.scaleX;
-
+        this.setParallaxConfig(this.parallax_2);
         // ------------------------------------ Placing the 3rd Layer
         this.parallax_3 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_3').setOrigin(0,0);
-        this.parallax_3.setScrollFactor(0);
-        this.parallax_3.displayWidth = game.config.width*3.5;
-        this.parallax_3.scaleY = this.parallax_base.scaleX;
-
+        this.setParallaxConfig(this.parallax_3);
         // ------------------------------------ Placing the 4th Layer
         this.parallax_4 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_4').setOrigin(0,0);
-        this.parallax_4.setScrollFactor(0);
-        this.parallax_4.displayWidth = game.config.width*3.5;
-        this.parallax_4.scaleY = this.parallax_base.scaleX;
+        this.setParallaxConfig(this.parallax_4);
 
         // Create Ground Tile Sprite
         this.ground = this.add.tileSprite(50, 510, 0, 0, 'ground').setOrigin(0, 0);
@@ -155,6 +141,12 @@ class Play extends Phaser.Scene{
             this.scene.restart();
         }
 
+    }
+
+    setParallaxConfig(parallaxLayer){
+        parallaxLayer.setScrollFactor(0);
+        parallaxLayer.displayWidth = game.config.width*3.5; // Fixing scale to fit screen
+        parallaxLayer.scaleY = parallaxLayer.scaleX;
     }
 
     checkCollision(obj1, obj2){
