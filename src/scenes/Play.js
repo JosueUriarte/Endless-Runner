@@ -18,7 +18,6 @@ class Play extends Phaser.Scene{
         this.load.image('spcar', "./assets/spcar.png");
 
         // ------------------PLAYER
-
         // load a spritesheet
         // this.load.spritesheet('explosion', './assets/explosion.png', {
         //     frameWidth: 64,
