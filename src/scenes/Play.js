@@ -34,6 +34,7 @@ class Play extends Phaser.Scene{
 
         // Assign Keys
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         this.cursors = this.input.keyboard.createCursorKeys(); 
 
         // Create and Place Parallax Background
@@ -98,6 +99,7 @@ class Play extends Phaser.Scene{
 
         this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', gameOverConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 30, 'Press R to Restart', gameOverConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 60, 'Press M to Return to Menu', gameOverConfig).setOrigin(0.5);
         this.gameOver = true;
     }
 
@@ -138,6 +140,11 @@ class Play extends Phaser.Scene{
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             //this.mainTheme.stop();
             this.scene.restart();
+        }
+
+        // Go to menu scene if game is over and M is pressed
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyM)) {
+            this.scene.start('menuScene');
         }
 
     }
