@@ -21,7 +21,7 @@ let config = {
     },
     autoCenter: true,
     pixelArt: true,
-    scene: [Menu, Play]
+    scene: [Menu, Play, Credits, Information]
 }
 
 let game = new Phaser.Game(config);
@@ -34,4 +34,4 @@ let borderPadding = borderUISize / 3;
 let scrollSpeed = 3;
 
 // reserve keyboard bindings
-let keyR, keySPACE;
+let keyR, keySPACE, keyC, keyB, keyM, keyI;

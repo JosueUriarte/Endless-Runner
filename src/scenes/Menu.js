@@ -49,6 +49,8 @@ class Menu extends Phaser.Scene{
 
         // define keys
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+        keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
         // keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         // keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
@@ -63,6 +65,16 @@ class Menu extends Phaser.Scene{
              }
             //this.sound.play('sfx_select');
             this.scene.start('playScene'); 
+        }
+
+        // Go to credits scene
+        if (Phaser.Input.Keyboard.JustDown(keyC)) {
+            this.scene.start('creditsScene');
+        }
+
+        // Go to info scene
+        if(Phaser.Input.Keyboard.JustDown(keyI)) {
+            this.scene.start('informationScene');
         }
 
         // if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
