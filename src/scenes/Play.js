@@ -148,7 +148,7 @@ class Play extends Phaser.Scene{
             fontFamily: 'Roboto',
             fontSize: '20px',
             //backgroundColor: '#00FFE0',
-            color: '#FFFFFF',
+            color: '#000000',
             align: 'center',
             padding:{
                 top: 5,

@@ -29,6 +29,9 @@ class Credits extends Phaser.Scene {
         // select sound
         this.soundSFX = this.sound.add('sfx_select');
 
+        // Add credits
+        this.backgroundImage = this.add.image(0, 0, 'credits').setOrigin(0,0);
+
     }
 
     update() {
