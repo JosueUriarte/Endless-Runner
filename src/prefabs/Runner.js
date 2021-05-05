@@ -64,7 +64,7 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
         }
         
         // if character jumps play jump sound
-        if (Phaser.Input.Keyboard.JustDown(scene.cursors.up)) {
+        if (Phaser.Input.Keyboard.JustDown(scene.cursors.up) && this.jumps > 0) {
             this.sfx_jump.play();
         }
     }

@@ -25,7 +25,7 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite{
         }
 
         // Accelerate Obstacle to the right
-        this.body.setVelocityX(this.obSpeed);
+        this.body.setVelocityX(this.obSpeed * (scrollSpeed/5));
     }
 
     chooseCar(num){

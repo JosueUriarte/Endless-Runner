@@ -1,6 +1,7 @@
 class Play extends Phaser.Scene{
     constructor() {
         super("playScene");
+        this.c = 0;
     }
 
     preload(){
@@ -88,8 +89,20 @@ class Play extends Phaser.Scene{
 
         // play music
         this.music = this.sound.add('chillWaveMusic');
-        this.music.play();
+        var musicConfig = {
+            mute: false,
+            volume: 0.5,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+        this.music.play(musicConfig);
         this.soundSFX = this.sound.add('sfx_select');
+
+        // Making game harder
+        this.changeTime = this.time.addEvent({ delay: 8000, callback: this.forwardTime, callbackScope: this, loop: true });
 
     }
 
@@ -108,8 +121,9 @@ class Play extends Phaser.Scene{
             // Spawning Obstacles
             var obstacle = this.obstacleGroup.get();
             if(obstacle){
-                obstacle.chooseCar(Math.floor(Math.random() * 2));
-                obstacle.spawn(this.ground.x - 100, this.ground.y - this.ground.height);
+                var waitDelay = (Math.random() * (7 - 4) + 4) * 1000;
+                //console.log(waitDelay);
+                this.clock = this.time.addEvent({ delay: 6000, callback: this.spawnObstacle(obstacle), callbackScope: this});
             }
 
             // Parallax Movement
@@ -128,6 +142,7 @@ class Play extends Phaser.Scene{
 
         // Restart Scene when game is over and key is pressed
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            scrollSpeed = 3;
             this.music.stop();
             this.soundSFX.play();
             this.scene.restart();
@@ -140,6 +155,22 @@ class Play extends Phaser.Scene{
             this.scene.start('menuScene');
         }
 
+    }
+
+    forwardTime(){
+        scrollSpeed += 0.5;
+
+        this.c++;
+
+        if(this.c === 30){
+            this.changeTime.remove(false);
+        }
+    }
+
+    spawnObstacle(obstacle){
+        //console.log("ay wassyp");
+        obstacle.chooseCar(Math.floor(Math.random() * 2));
+        obstacle.spawn(this.ground.x - 100, this.ground.y - this.ground.height);
     }
     
     gameEnd(){
