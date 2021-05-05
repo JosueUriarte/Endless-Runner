@@ -104,6 +104,23 @@ class Play extends Phaser.Scene{
         // Making game harder
         this.changeTime = this.time.addEvent({ delay: 8000, callback: this.forwardTime, callbackScope: this, loop: true });
 
+        //score
+        this.score = 0;
+        let scoreConfig = {
+            fontFamily: "Roboto",
+            fontSize: '18px',
+            color: '#000000'
+        };
+        this.scoreText = this.add.text(130, 420, this.score, scoreConfig).setOrigin(0);
+        this.scoreText.depth = 10;
+  
+        this.scoreTimer = this.time.addEvent({
+            delay: 1000,
+            callback: this.updateScore,
+            callbackScope: this,
+            loop: true
+        });
+
     }
 
     update() {
@@ -209,4 +226,12 @@ class Play extends Phaser.Scene{
                 return true;
         } else{ return false;} 
     }
+
+    updateScore() {
+        if (!this.gameOver) {
+            this.score += 1;
+            this.scoreText.text = this.score;
+        }
+    }
+    
 }
