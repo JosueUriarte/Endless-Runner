@@ -8,7 +8,6 @@ class Credits extends Phaser.Scene {
         // keys to interact
         keyB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
 
-        console.log("In credits scene");
         // temp text for credits
         let creditTextConfig = {
             fontFamily: 'Driod Sans', 

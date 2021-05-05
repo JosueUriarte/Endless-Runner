@@ -10,6 +10,7 @@ class Menu extends Phaser.Scene{
         // load images
         this.load.image('background', './assets/theTitle.png');
         this.load.image('credits', './assets/credits.png');
+        this.load.image('controls', './assets/controls.png');
 
         // load audio
         //this.load.audio('sfx_select', './assets/blip_select12.wav');

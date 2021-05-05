@@ -162,7 +162,7 @@ class Play extends Phaser.Scene{
             fontSize: '20px',
             color: '#000000'
         };
-        this.scoreText = this.add.text(130, 420, this.score, scoreConfig).setOrigin(0);
+        this.scoreText = this.add.text(130, 425, this.score, scoreConfig).setOrigin(0);
         this.scoreText.depth = 10;
   
         this.scoreTimer = this.time.addEvent({

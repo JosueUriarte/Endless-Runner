@@ -6,7 +6,6 @@ class Information extends Phaser.Scene {
     create() {
         keyB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
 
-        console.log("In credits scene");
         // temp text for credits
         let creditTextConfig = {
             fontFamily: 'Driod Sans', 
@@ -27,6 +26,7 @@ class Information extends Phaser.Scene {
         // select sound
         this.soundSFX = this.sound.add('sfx_select');
 
+        this.backgroundImage = this.add.image(0, 0, 'controls').setOrigin(0,0);
     }
 
     update() {
