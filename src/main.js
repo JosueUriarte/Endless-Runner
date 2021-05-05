@@ -1,4 +1,12 @@
 // Freeway Run
+// Max Gasser
+// Josue Uriarte Reyes
+// Joao Rosas
+// 5/5/21 completed
+//
+// Creative tilt:
+// -Made endless runner from left to right instead of right to left
+// -Went for a creative art style
 
 // global variables
 let cursors;
