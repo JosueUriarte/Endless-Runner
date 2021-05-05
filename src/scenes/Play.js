@@ -92,7 +92,7 @@ class Play extends Phaser.Scene{
 
         // play music
         this.music = this.sound.add('chillWaveMusic');
-        //this.music.play(); 
+        this.music.play(); 
     }
 
     gameEnd(){
