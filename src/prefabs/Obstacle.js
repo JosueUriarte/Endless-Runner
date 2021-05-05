@@ -40,13 +40,14 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite{
             case 1:
                 console.log("one");
                 this.setTexture('car');
-                this.obSpeed = 400;
+                this.obSpeed = 500;
+                
                 break;
             default:
                 console.log("no car specified")
         }
         
-        this.body.setSize(this.width, this.height, true);
+        this.body.setSize(this.width/2, this.height - 30);
     }
 
 }

@@ -7,12 +7,13 @@ class Play extends Phaser.Scene{
 
         // load the images/tile sprites
         // ------------------BACKGROUND
-        this.load.image('parallax_0', './assets/parallax-mountain-bg.png');
-        this.load.image('parallax_1', './assets/parallax-mountain-montain-far.png');
-        this.load.image('parallax_2', './assets/parallax-mountain-mountains.png');
+        this.load.image('parallax_0', './assets/SunsetParallax.png');
+        this.load.image('parallax_1', './assets/CloudsParallax.png');
+        this.load.image('parallax_2', './assets/MountainsParallax.png');
         this.load.image('parallax_3', './assets/parallax-mountain-trees.png');
         this.load.image('parallax_4', './assets/parallax-mountain-foreground-trees.png');
         this.load.image('ground', "./assets/ground.png");
+        this.load.image('frame', "./assets/Frame.png");
         this.load.image('test_player', "./assets/test_player.png");
         this.load.image('car', "./assets/car.png");
         this.load.image('spcar', "./assets/spcar.png");
@@ -28,6 +29,8 @@ class Play extends Phaser.Scene{
     }
 
     create() {
+
+        
         
         // Create Game Camera
         this.myCam = this.cameras.main;
@@ -35,18 +38,18 @@ class Play extends Phaser.Scene{
         // Assign Keys
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
-        this.cursors = this.input.keyboard.createCursorKeys(); 
+        this.cursors = this.input.keyboard.createCursorKeys();
 
         // Create and Place Parallax Background
         // ------------------------------------ Placing the base background
         this.parallax_base = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_0').setOrigin(0,0);
-        this.setParallaxConfig(this.parallax_base);
+        //this.setParallaxConfig(this.parallax_base);
         // ------------------------------------ Placing the 1st Layer
         this.parallax_1 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_1').setOrigin(0,0);
-        this.setParallaxConfig(this.parallax_1);
+        //this.setParallaxConfig(this.parallax_1);
         // ------------------------------------ Placing the 2nd Layer
         this.parallax_2 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_2').setOrigin(0,0);
-        this.setParallaxConfig(this.parallax_2);
+        //this.setParallaxConfig(this.parallax_2);
         // ------------------------------------ Placing the 3rd Layer
         this.parallax_3 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_3').setOrigin(0,0);
         this.setParallaxConfig(this.parallax_3);
@@ -59,11 +62,18 @@ class Play extends Phaser.Scene{
         this.physics.add.existing(this.ground);
         this.ground.body.immovable = true;
 
+
+
+        // Create Frame
+        this.layer = this.add.layer();
+        this.layer.depth = 1;
+        this.layer.add(this.add.image(game.config.width, game.config.height, 'frame').setOrigin(1));
+
         // Set up game over flag
         this.gameOver = false;        
 
         // Create New Player
-        this.test_player = new Runner(this, game.config.width - 150, game.config.height - 100, 'test_player');
+        this.test_player = new Runner(this, game.config.width - 280, game.config.height - 100, 'test_player');
 
         // Create Obstacle
         this.obstacleGroup = this.physics.add.group ({
@@ -79,6 +89,8 @@ class Play extends Phaser.Scene{
         
         // DEBUG STUFF
         this.info = this.add.text(0, 0, 'objects being used', { fill: '#00ff00' });
+
+        
         
     }
 
@@ -124,7 +136,7 @@ class Play extends Phaser.Scene{
 
             // Parallax Movement
             // ----------------- Changing the scroll speed of each layer
-            this.parallax_1.tilePositionX -= scrollSpeed / 4;
+            this.parallax_1.tilePositionX -= scrollSpeed / 6;
             this.parallax_2.tilePositionX -= scrollSpeed / 3;
             this.parallax_3.tilePositionX -= scrollSpeed / 2;
             this.parallax_4.tilePositionX -= scrollSpeed;
