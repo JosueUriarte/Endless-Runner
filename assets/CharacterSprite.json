@@ -1,5 +1,5 @@
 { "frames": {
-   "CharacterSprite 0.aseprite": {
+   "CharacterRun0": {
     "frame": { "x": 0, "y": 0, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
@@ -7,7 +7,7 @@
     "sourceSize": { "w": 40, "h": 62 },
     "duration": 100
    },
-   "CharacterSprite 1.aseprite": {
+   "CharacterRun1": {
     "frame": { "x": 40, "y": 0, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
@@ -15,7 +15,7 @@
     "sourceSize": { "w": 40, "h": 62 },
     "duration": 100
    },
-   "CharacterSprite 2.aseprite": {
+   "CharacterRun2": {
     "frame": { "x": 80, "y": 0, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
@@ -23,7 +23,7 @@
     "sourceSize": { "w": 40, "h": 62 },
     "duration": 100
    },
-   "CharacterSprite 3.aseprite": {
+   "CharacterRun3": {
     "frame": { "x": 120, "y": 0, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
@@ -31,7 +31,7 @@
     "sourceSize": { "w": 40, "h": 62 },
     "duration": 100
    },
-   "CharacterSprite 4.aseprite": {
+   "CharacterJump0": {
     "frame": { "x": 160, "y": 0, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
@@ -39,7 +39,7 @@
     "sourceSize": { "w": 40, "h": 62 },
     "duration": 100
    },
-   "CharacterSprite 5.aseprite": {
+   "CharacterJump1": {
     "frame": { "x": 200, "y": 0, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
@@ -47,24 +47,32 @@
     "sourceSize": { "w": 40, "h": 62 },
     "duration": 100
    },
-   "CharacterSprite 6.aseprite": {
-    "frame": { "x": 240, "y": 0, "w": 40, "h": 62 },
+   "CharacterExplode0": {
+    "frame": { "x": 0, "y": 62, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 62 },
     "sourceSize": { "w": 40, "h": 62 },
     "duration": 100
    },
-   "CharacterSprite 7.aseprite": {
-    "frame": { "x": 280, "y": 0, "w": 40, "h": 62 },
+   "CharacterExplode1": {
+    "frame": { "x": 40, "y": 62, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 62 },
     "sourceSize": { "w": 40, "h": 62 },
     "duration": 100
    },
-   "CharacterSprite 8.aseprite": {
-    "frame": { "x": 320, "y": 0, "w": 40, "h": 62 },
+   "CharacterExplode2": {
+    "frame": { "x": 80, "y": 62, "w": 40, "h": 62 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 62 },
+    "sourceSize": { "w": 40, "h": 62 },
+    "duration": 100
+   },
+   "CharacterExplode3": {
+    "frame": { "x": 120, "y": 62, "w": 40, "h": 62 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 40, "h": 62 },
@@ -74,10 +82,10 @@
  },
  "meta": {
   "app": "http://www.aseprite.org/",
-  "version": "1.2.27-x64",
-  "image": "CharacterSprite.png",
+  "version": "1.2.9-x64",
+  "image": "C:\\Users\\Josue Uriarte\\Desktop\\Phaser3 Projects\\Endless Runner\\assets\\CharacterSprite.png",
   "format": "RGBA8888",
-  "size": { "w": 360, "h": 62 },
+  "size": { "w": 256, "h": 128 },
   "scale": "1",
   "frameTags": [
   ],

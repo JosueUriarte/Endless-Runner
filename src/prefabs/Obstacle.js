@@ -33,15 +33,22 @@ class Obstacle extends Phaser.Physics.Arcade.Sprite{
         // Here we choose what car will be spawned
         switch(num){
             case 0:
-                console.log("zero");
-                this.setTexture('spcar');
+                //console.log("zero");
+                this.play('bluecar1');
                 this.obSpeed = 500;
                 break;
             case 1:
-                console.log("one");
-                this.setTexture('car');
+                //console.log("one");
+                this.play('redcar1');
                 this.obSpeed = 500;
-                
+                break;
+            case 2:
+                this.play('whitecar1');
+                this.obSpeed = 500;
+                break;
+            case 3:
+                this.setTexture('cone');
+                this.obSpeed = 500;
                 break;
             default:
                 console.log("no car specified")

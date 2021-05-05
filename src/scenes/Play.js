@@ -11,16 +11,41 @@ class Play extends Phaser.Scene{
         this.load.image('parallax_0', './assets/SunsetParallax.png');
         this.load.image('parallax_1', './assets/CloudsParallax.png');
         this.load.image('parallax_2', './assets/MountainsParallax.png');
-        this.load.image('parallax_3', './assets/parallax-mountain-trees.png');
-        this.load.image('parallax_4', './assets/parallax-mountain-foreground-trees.png');
-        this.load.image('ground', "./assets/ground.png");
+        this.load.image('parallax_3', './assets/TreesParallax.png');
+        this.load.image('parallax_4', './assets/LightPostParallax.png');
+        this.load.image('ground', "./assets/road.png");
         this.load.image('frame', "./assets/Frame.png");
         this.load.image('test_player', "./assets/test_player.png");
         this.load.image('car', "./assets/car.png");
         this.load.image('spcar', "./assets/spcar.png");
+        this.load.image('cone', "./assets/Conev2.png");
+
+        this.load.spritesheet('car1','./assets/BlueCar.png', {
+            frameWidth: 200,
+            frameHeight: 50,
+            startFrame: 0,
+            endFrame: 1,
+            repeat: -1
+        });
+
+        this.load.spritesheet('car2','./assets/RedCar.png', {
+            frameWidth: 200,
+            frameHeight: 50,
+            startFrame: 0,
+            endFrame: 1,
+            repeat: -1
+        });
+
+        this.load.spritesheet('car3','./assets/WhiteTruck.png', {
+            frameWidth: 160,
+            frameHeight: 60,
+            startFrame: 0,
+            endFrame: 1,
+            repeat: -1
+        });
 
         // ------------------PLAYER
-        // load a spritesheet
+        this.load.atlas('player', './assets/CharacterSprite.png','./assets/CharacterSprite.json');
         // this.load.spritesheet('explosion', './assets/explosion.png', {
         //     frameWidth: 64,
         //     frameHeight: 32,
@@ -30,6 +55,32 @@ class Play extends Phaser.Scene{
     }
 
     create() {
+
+        // Make anims
+        this.anims.create({ key: 'player_run', frames: this.anims.generateFrameNames('player', { prefix: 'CharacterRun', end: 3, zeroPad: 1 }), repeat: -1, frameRate:15 });
+        this.anims.create({ key: 'player_jump', frames: this.anims.generateFrameNames('player', { prefix: 'CharacterJump', end: 1, zeroPad: 1 }), repeat: -1 });
+        this.anims.create({ key: 'player_explode', frames: this.anims.generateFrameNames('player', { prefix: 'CharacterExplode', end: 3, zeroPad: 1 }), repeat: 0 });
+
+        this.anims.create({
+            key: 'bluecar1',
+            frames: this.anims.generateFrameNumbers('car1', { frames: [ 0, 1] }),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'redcar1',
+            frames: this.anims.generateFrameNumbers('car2', { frames: [ 0, 1] }),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'whitecar1',
+            frames: this.anims.generateFrameNumbers('car3', { frames: [ 0, 1] }),
+            frameRate: 8,
+            repeat: -1
+        });
 
         // Create Game Camera
         this.myCam = this.cameras.main;
@@ -50,14 +101,14 @@ class Play extends Phaser.Scene{
         this.parallax_2 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_2').setOrigin(0,0);
         //this.setParallaxConfig(this.parallax_2);
         // ------------------------------------ Placing the 3rd Layer
-        this.parallax_3 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_3').setOrigin(0,0);
-        this.setParallaxConfig(this.parallax_3);
+        this.parallax_3 = this.add.tileSprite(0, 110, game.config.width, game.config.height, 'parallax_3').setOrigin(0,0);
+        //this.setParallaxConfig(this.parallax_3);
         // ------------------------------------ Placing the 4th Layer
-        this.parallax_4 = this.add.tileSprite(0, 0, game.config.width, game.config.height, 'parallax_4').setOrigin(0,0);
-        this.setParallaxConfig(this.parallax_4);
+        this.parallax_4 = this.add.tileSprite(0, 90, game.config.width, game.config.height, 'parallax_4').setOrigin(0,0);
+        //this.setParallaxConfig(this.parallax_4);
 
         // Create Ground Tile Sprite
-        this.ground = this.add.tileSprite(50, 510, 0, 0, 'ground').setOrigin(0, 0);
+        this.ground = this.add.tileSprite(0, 480, game.config.width, game.config.height, 'ground').setOrigin(0, 0);
         this.physics.add.existing(this.ground);
         this.ground.body.immovable = true;
 
@@ -107,8 +158,8 @@ class Play extends Phaser.Scene{
         //score
         this.score = 0;
         let scoreConfig = {
-            fontFamily: "Roboto",
-            fontSize: '18px',
+            fontFamily: "Impact",
+            fontSize: '20px',
             color: '#000000'
         };
         this.scoreText = this.add.text(130, 420, this.score, scoreConfig).setOrigin(0);
@@ -125,12 +176,15 @@ class Play extends Phaser.Scene{
 
     update() {
 
-        // DEBUG FOR SPAWNER
-        this.info.setText([
-            'Used: ' + this.obstacleGroup.getTotalUsed(),
-            'Free: ' + this.obstacleGroup.getTotalFree()
-            //'Obstacle Num: ' + Math.floor(Math.random() * 2)
-        ]);
+        // Parallax Movement
+        // ----------------- Changing the scroll speed of each layer
+        this.parallax_1.tilePositionX -= scrollSpeed / 6;
+        this.parallax_2.tilePositionX -= scrollSpeed / 3;
+        this.parallax_3.tilePositionX -= scrollSpeed / 2;
+        this.parallax_4.tilePositionX -= scrollSpeed;
+
+        // Ground Movement
+        this.ground.tilePositionX -= scrollSpeed;
         
         // Do these tasks if game is not over
         if(!this.gameOver) {
@@ -143,15 +197,7 @@ class Play extends Phaser.Scene{
                 this.clock = this.time.addEvent({ delay: 6000, callback: this.spawnObstacle(obstacle), callbackScope: this});
             }
 
-            // Parallax Movement
-            // ----------------- Changing the scroll speed of each layer
-            this.parallax_1.tilePositionX -= scrollSpeed / 6;
-            this.parallax_2.tilePositionX -= scrollSpeed / 3;
-            this.parallax_3.tilePositionX -= scrollSpeed / 2;
-            this.parallax_4.tilePositionX -= scrollSpeed;
-
-            // Ground Movement
-            this.ground.tilePositionX -= scrollSpeed / 2.5;
+            
         
             // Player Update
             this.test_player.update(this);
@@ -167,6 +213,7 @@ class Play extends Phaser.Scene{
 
         // Go to menu scene if game is over and M is pressed
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyM)) {
+            scrollSpeed = 3;
             this.music.stop();
             this.soundSFX.play();
             this.scene.start('menuScene');
@@ -186,12 +233,13 @@ class Play extends Phaser.Scene{
 
     spawnObstacle(obstacle){
         //console.log("ay wassyp");
-        obstacle.chooseCar(Math.floor(Math.random() * 2));
-        obstacle.spawn(this.ground.x - 100, this.ground.y - this.ground.height);
+        //obstacle.chooseCar(3);
+        obstacle.chooseCar(Math.floor(Math.random() * 4));
+        obstacle.spawn(this.ground.x + 10, this.ground.y);
     }
     
     gameEnd(){
-
+        this.test_player.play('player_explode');
         let gameOverConfig = {
             fontFamily: 'Roboto',
             fontSize: '20px',
@@ -204,6 +252,8 @@ class Play extends Phaser.Scene{
             },
             fixedWidth: 0
         }
+
+        scrollSpeed = 3;
 
         this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', gameOverConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 30, 'Press R to Restart', gameOverConfig).setOrigin(0.5);

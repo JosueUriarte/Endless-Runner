@@ -1,4 +1,4 @@
-// Endless Runner Project
+// Freeway Run
 
 // global variables
 let cursors;
