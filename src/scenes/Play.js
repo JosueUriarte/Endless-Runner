@@ -30,8 +30,6 @@ class Play extends Phaser.Scene{
 
     create() {
 
-        
-        
         // Create Game Camera
         this.myCam = this.cameras.main;
 
@@ -61,8 +59,6 @@ class Play extends Phaser.Scene{
         this.ground = this.add.tileSprite(50, 510, 0, 0, 'ground').setOrigin(0, 0);
         this.physics.add.existing(this.ground);
         this.ground.body.immovable = true;
-
-
 
         // Create Frame
         this.layer = this.add.layer();
@@ -95,27 +91,6 @@ class Play extends Phaser.Scene{
         this.music.play();
         this.soundSFX = this.sound.add('sfx_select');
 
-    }
-
-    gameEnd(){
-
-        let gameOverConfig = {
-            fontFamily: 'Roboto',
-            fontSize: '20px',
-            //backgroundColor: '#00FFE0',
-            color: '#FFFFFF',
-            align: 'center',
-            padding:{
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-
-        this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', gameOverConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 30, 'Press R to Restart', gameOverConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 60, 'Press M to Return to Menu', gameOverConfig).setOrigin(0.5);
-        this.gameOver = true;
     }
 
     update() {
@@ -165,6 +140,27 @@ class Play extends Phaser.Scene{
             this.scene.start('menuScene');
         }
 
+    }
+    
+    gameEnd(){
+
+        let gameOverConfig = {
+            fontFamily: 'Roboto',
+            fontSize: '20px',
+            //backgroundColor: '#00FFE0',
+            color: '#FFFFFF',
+            align: 'center',
+            padding:{
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+
+        this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', gameOverConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 30, 'Press R to Restart', gameOverConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 60, 'Press M to Return to Menu', gameOverConfig).setOrigin(0.5);
+        this.gameOver = true;
     }
 
     setParallaxConfig(parallaxLayer){
