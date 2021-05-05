@@ -26,11 +26,15 @@ class Credits extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2, "To return to Menu Press B",
         creditTextConfig).setOrigin(0, 0);
 
+        // select sound
+        this.soundSFX = this.sound.add('sfx_select');
+
     }
 
     update() {
         // If press B send back to menu
         if (Phaser.Input.Keyboard.JustDown(keyB)) {
+            this.soundSFX.play();
             this.scene.start('menuScene');
         }
     }

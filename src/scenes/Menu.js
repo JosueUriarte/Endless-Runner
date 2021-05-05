@@ -76,11 +76,13 @@ class Menu extends Phaser.Scene{
 
         // Go to credits scene
         if (Phaser.Input.Keyboard.JustDown(keyC)) {
+            this.sound.play('sfx_select_2');
             this.scene.start('creditsScene');
         }
 
         // Go to info scene
         if(Phaser.Input.Keyboard.JustDown(keyI)) {
+            this.sound.play('sfx_select_2');
             this.scene.start('informationScene');
         }
 
