@@ -9,6 +9,8 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
         this.body.setSize(this.width, this.height, true);
         this.setGravityY(2000);
         
+        // jump sound
+        this.sfx_jump = scene.sound.add('sfx_jump');
 
         // Physics Variables
         this.ACCELERATION = 1000;
@@ -51,6 +53,7 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
         // allows for steady change up to a certain key down duration
         if (this.jumps > 0 && Phaser.Input.Keyboard.DownDuration(scene.cursors.up, 150)) {
             this.body.velocity.y = this.JUMP_VELOCITY;
+            //this.sfx_jump.play();
             this.jumping = true;
         }
 
@@ -59,6 +62,10 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
             this.jumps--;
             this.jumping = false;
         }
-       
+        
+        // if character jumps play jump sound
+        if (Phaser.Input.Keyboard.JustDown(scene.cursors.up)) {
+            this.sfx_jump.play();
+        }
     }
 }

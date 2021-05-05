@@ -90,8 +90,9 @@ class Play extends Phaser.Scene{
         // DEBUG STUFF
         this.info = this.add.text(0, 0, 'objects being used', { fill: '#00ff00' });
 
-        
-        
+        // play music
+        this.music = this.sound.add('chillWaveMusic');
+        //this.music.play(); 
     }
 
     gameEnd(){
@@ -150,12 +151,13 @@ class Play extends Phaser.Scene{
 
         // Restart Scene when game is over and key is pressed
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
-            //this.mainTheme.stop();
+            this.music.stop();
             this.scene.restart();
         }
 
         // Go to menu scene if game is over and M is pressed
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyM)) {
+            this.music.stop();
             this.scene.start('menuScene');
         }
 
