@@ -13,7 +13,7 @@ class Play extends Phaser.Scene{
         this.load.image('parallax_2', './assets/MountainsParallax.png');
         this.load.image('parallax_3', './assets/TreesParallax.png');
         this.load.image('parallax_4', './assets/LightPostParallax.png');
-        this.load.image('ground', "./assets/road.png");
+        this.load.image('ground', "./assets/Road.png");
         this.load.image('frame', "./assets/Frame.png");
         this.load.image('test_player', "./assets/test_player.png");
         this.load.image('car', "./assets/car.png");
